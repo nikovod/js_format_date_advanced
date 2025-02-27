@@ -12,8 +12,17 @@ function formatDate(date, fromFormat, toFormat) {
   const fullYear = 'YYYY';
   const shortYear = 'YY';
 
+  // find separator in fromFormat arr
+  let fromSeparator = '';
+
+  for (const value of fromFormat) {
+    if (value.toLowerCase !== value.toUpperCase) {
+      fromSeparator = value;
+    }
+  }
+
   // split the date by separator in fromFormat arr
-  const splittedDate = date.split(fromFormat[3]);
+  const splittedDate = date.split(fromSeparator);
 
   // create tempDate and move year to first place, then month, then day
   const tempDate = [];
@@ -44,6 +53,9 @@ function formatDate(date, fromFormat, toFormat) {
 
       case year.toString().length === 4:
         return year % 100;
+
+      default:
+        return 'Invalid input';
     }
   };
 
@@ -73,8 +85,17 @@ function formatDate(date, fromFormat, toFormat) {
     }
   }
 
+  // find separator in toFormat arr
+  let toSeparator = '';
+
+  for (const value of toFormat) {
+    if (value.toLowerCase !== value.toUpperCase) {
+      toSeparator = value;
+    }
+  }
+
   // join by separator from toFormat and return
-  return resultDate.join(toFormat[3]);
+  return resultDate.join(toSeparator);
 }
 
 module.exports = formatDate;
